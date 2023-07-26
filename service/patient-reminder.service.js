@@ -25,7 +25,7 @@ function viralLoadReminders(data) {
   let reminders = [];
 
   let labMessage = 'Last viral load: none';
-  let requires = 'Patient requires viral load test. ';
+  let requires = 'Patient requires viral load test';
   if (data.last_vl_date) {
     labMessage =
       'Last viral load: ' +
@@ -45,7 +45,7 @@ function viralLoadReminders(data) {
     reminders.push({
       message:
         requires +
-        'Patients who are between 0-24 years old and 3 months after ART initiation ' +
+        '.Patients who are between 0-24 years old and 3 months after ART initiation ' +
         'require a viral load test.' +
         labMessage,
       title: 'Viral Load Reminder',
@@ -59,7 +59,7 @@ function viralLoadReminders(data) {
     reminders.push({
       message:
         requires +
-        'Patients who are between 0-24 years old ' +
+        '.Patients who are between 0-24 years old ' +
         'require a viral load test every 6 months. ' +
         labMessage,
       title: 'Viral Load Reminder',
@@ -73,7 +73,7 @@ function viralLoadReminders(data) {
     reminders.push({
       message:
         requires +
-        'A Patient with Viral Load that is more than 200 requires a viral load test every 3 months. ' +
+        '.A Patient with Viral Load that is more than 200 requires a viral load test every 3 months. ' +
         labMessage,
       title: 'Viral Load Reminder',
       type: 'danger',
@@ -87,7 +87,7 @@ function viralLoadReminders(data) {
     reminders.push({
       message:
         requires +
-        'Patients older than 25 years and newly on ART require ' +
+        '.Patients older than 25 years and newly on ART require ' +
         'a viral load test after 12 months. ' +
         labMessage,
       title: 'Viral Load Reminder',
@@ -104,7 +104,7 @@ function viralLoadReminders(data) {
     reminders.push({
       message:
         requires +
-        'Patients older than 25 years and on ART for more than 1 year require ' +
+        '.Patients older than 25 years and on ART for more than 1 year require ' +
         'a viral load test every year. ' +
         labMessage,
       title: 'Viral Load Reminder',
@@ -118,7 +118,7 @@ function viralLoadReminders(data) {
     reminders.push({
       message:
         requires +
-        'Patients older than 25 years and 3 months after ART initiation require a viral load test. ' +
+        '.Patients older than 25 years and 3 months after ART initiation require a viral load test. ' +
         labMessage,
       title: 'Viral Load Reminder',
       type: 'danger',
@@ -131,7 +131,7 @@ function viralLoadReminders(data) {
     reminders.push({
       message:
         requires +
-        'A Patient with Viral Load that is more than 200 requires a viral load test every 3 months. ' +
+        '.A Patient with Viral Load that is more than 200 requires a viral load test every 3 months. ' +
         labMessage,
       title: 'Viral Load Reminder',
       type: 'danger',
@@ -145,7 +145,7 @@ function viralLoadReminders(data) {
     reminders.push({
       message:
         requires +
-        'A pregnant or breastfeeding patient with vl > 200 requires ' +
+        '.A pregnant or breastfeeding patient with vl > 200 requires ' +
         'a viral load test every 3 months. ' +
         labMessage,
       title: 'Viral Load Reminder',
@@ -159,7 +159,7 @@ function viralLoadReminders(data) {
     reminders.push({
       message:
         requires +
-        'A pregnant or breastfeeding patient requires ' +
+        '.A pregnant or breastfeeding patient requires ' +
         'a viral load test every 6 months. ' +
         labMessage,
       title: 'Viral Load Reminder',
