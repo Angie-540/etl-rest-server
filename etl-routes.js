@@ -82,6 +82,7 @@ import { Covid19MonthlyReport } from './service/covid-19/covid-19-monthly-report
 import { MlWeeklyPredictionsService } from './service/ml-weekly-predictions.service';
 import { getPatientPredictedScore } from './service/predictions/ml-prediction-service';
 import { CohortModuleService } from './app/otz/cohort-module.service';
+import { JuaMtotoWakoService } from './service/jua-mtoto-wako/jua-mtoto-wako.js';
 
 module.exports = (function () {
   var routes = [
@@ -6329,6 +6330,53 @@ module.exports = (function () {
         },
         description: 'Get cohort viral load suppression rate',
         notes: 'Api endpoint that returns cohort viral load suppression rate',
+        tags: ['api']
+      }
+    },
+    {
+      method: 'GET',
+      path: '/etl/jua-mtoto-wako',
+      config: {
+        auth: 'simple',
+        plugins: {},
+        handler: function (request, reply) {
+          if (request.query.locationUuids) {
+            preRequest.resolveLocationIdsToLocationUuids(request, function () {
+              let requestParams = Object.assign(
+                {},
+                request.query,
+                request.params
+              );
+              let reportParams = etlHelpers.getReportParams(
+                'hiv-cervical-cancer-screening-monthly-report',
+                ['startDate', 'endDate', 'locationUuids'],
+                requestParams
+              );
+              let report = 'MOH-412-report';
+              if (request.query.locationType === 'primary_care_facility') {
+                reportParams.requestParams['primaryCareLocations'] =
+                  reportParams.requestParams.locations;
+                delete reportParams.requestParams.locations;
+                report = 'MOH-412-PCF-report';
+              }
+
+              const juaMtotoWakoService = new JuaMtotoWakoService(
+                report,
+                reportParams.requestParams
+              );
+              juaMtotoWakoService
+                .generateReport()
+                .then((result) => {
+                  reply(result);
+                })
+                .catch((error) => {
+                  reply(error);
+                });
+            });
+          }
+        },
+        description: 'jua-mtoto-wako-register',
+        notes: 'Returns Report for Jua Mtoto Wako',
         tags: ['api']
       }
     }
