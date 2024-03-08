@@ -99,7 +99,7 @@
     ]
   },
   {
-    "page": "4.0 ASSESSMENT ",
+    "page": "4.0 ASSESSMENT - REASONS FOR NON-SUPPRESION ",
     "pageBody": [
       {
         "sectionTitle": "MAIN REASON FOR NON-SUPPRESSION",
@@ -107,6 +107,104 @@
       },
       {
         "sectionTitle": "OTHER REASON FOR NON-SUPPRESSION",
+        "sections": []
+      },
+      {
+        "sectionTitle": "PRIORITY SOLUTION",
+        "sections": []
+      },
+      {
+        "sectionTitle": "DATE OF INTERVENTION(DD/MM/YY)",
+        "sections": []
+      }
+    ]
+  },
+  {
+    "page": "5.0 EAC PLAN AND EXECUTION ",
+    "pageBody": [
+      {
+        "sectionTitle": "ADHERENCE SESSION 1 DATE DONE",
+        "sections": []
+      },
+      {
+        "sectionTitle": "ADHERENCE SESSION 2 DATE DONE",
+        "sections": []
+      },
+      {
+        "sectionTitle": "ADHERENCE SESSION 3 DATE DONE",
+        "sections": []
+      },
+      {
+        "sectionTitle": "HOME VISIT DATE DONE",
+        "sections": []
+      },
+      {
+        "sectionTitle": "REPEAT VIRAL LOAD TEST RESULT AFTER INTERVNETION(COPIES/ML)",
+        "sections": []
+      },
+      {
+        "sectionTitle": "DATE VL DONE",
+        "sections": []
+      },
+      {
+        "sectionTitle": "ELIGIBLE FOR SWITCHING TO 2ND OR 3RD LINE",
+        "sections": []
+      },
+      {
+        "sectionTitle": "IF YES, INDICATE THE REGIMEN",
+        "sections": []
+      },
+      {
+        "sectionTitle": "ELIGIBLE FOR DRT(YES/NO)",
+        "sections": []
+      },
+      {
+        "sectionTitle": "IF RESISTANT WHAT'S THE NEW REGIMEN",
+        "sections": []
+      },
+      {
+        "sectionTitle": "DATE OF NEW REGIMEN INITIATION",
+        "sections": []
+      },
+      {
+        "sectionTitle": "DATE 2ND MDT WAS DONE",
+        "sections": []
+      },
+      {
+        "sectionTitle": "REPEAT VIRAL LOAD TEST RESULT AFTER INTERVENTIONS",
+        "sections": []
+      },
+      {
+        "sectionTitle": "DATE VL DONE",
+        "sections": []
+      }
+    ]
+  },
+  {
+    "page": "6.0 SUPPORT INTERVENTION POST SUPPRESSION",
+    "pageBody": [
+      {
+        "sectionTitle": "SUPPORT INTERVENTION 1 POST SUPPRESSION",
+        "sections": []
+      },
+      {
+        "sectionTitle": "SUPPORT INTERVENTION 2 POST SUPPRESSION",
+        "sections": []
+      },
+      {
+        "sectionTitle": "SUPPORT INTERVENTION 3 POST SUPPRESSION",
+        "sections": []
+      },
+      {
+        "sectionTitle": "HOME VISIT DATE DONE",
+        "sections": []
+      },
+      {
+        "sectionTitle": "STATUS AS AT JULY",
+        "sections": []
+      },
+      {
+        "sectionTitle": "COMMENTS",
         "sections": []
       }
     ]
