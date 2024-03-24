@@ -1,0 +1,80 @@
+{
+  "name": "otzRegisterModulesBase",
+  "version": "1.0",
+  "tag": "",
+  "description": "",
+  "uses": [],
+  "sources": [
+    {
+      "table": "etl.flat_otz_summary",
+      "alias": "o"
+    }
+  ],
+  "columns": [
+    {
+      "type": "simple_column",
+      "alias": "person_id",
+      "column": "o.person_id"
+    },
+    {
+      "type": "simple_column",
+      "alias": "location_id",
+      "column": "o.location_id"
+    },
+    {
+      "type": "simple_column",
+      "alias": "otz_future_decison_making",
+      "column": "o.otz_future_decison_making"
+    },
+    {
+      "type": "simple_column",
+      "alias": "otz_leadership",
+      "column": "o.otz_leadership"
+    },
+    {
+      "type": "simple_column",
+      "alias": "otz_orientation",
+      "column": "o.otz_orientation"
+    },
+    {
+      "type": "simple_column",
+      "alias": "otz_participation",
+      "column": "o.otz_participation"
+    },
+    {
+      "type": "simple_column",
+      "alias": "otz_peer_mentorship",
+      "column": "o.otz_peer_mentorship"
+    },
+    {
+      "type": "simple_column",
+      "alias": "otz_positive_health_dignity_prevention",
+      "column": "o.otz_positive_health_dignity_prevention"
+    },
+    {
+      "type": "simple_column",
+      "alias": "otz_transition_adult_care",
+      "column": "o.otz_transition_adult_care"
+    },
+    {
+      "type": "simple_column",
+      "alias": "otz_treatment_literacy",
+      "column": "o.otz_treatment_literacy"
+    }
+  ],
+  "filters": {
+    "conditionJoinOperator": "and",
+    "conditions": [
+      {
+        "filterType": "tableColumns",
+        "conditionExpression": "DATE(o.encounter_datetime) <= DATE(?)",
+        "parameterName": "endDate"
+      },
+      {
+        "filterType": "tableColumns",
+        "conditionExpression": "DATE(o.next_encounter_datetime) IS NULL || DATE(o.next_encounter_datetime) > DATE(?)",
+        "parameterName": "endDate"
+      }
+    ]
+  }
+}

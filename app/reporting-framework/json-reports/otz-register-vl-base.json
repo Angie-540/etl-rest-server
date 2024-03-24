@@ -1,0 +1,91 @@
+{
+  "name": "otzRegisterVlBase",
+  "version": "1.0",
+  "tag": "",
+  "description": "",
+  "uses": [],
+  "sources": [
+    {
+      "table": "etl.flat_otz_summary",
+      "alias": "o"
+    },
+    {
+      "table": "etl.flat_labs_and_imaging",
+      "alias": "i",
+      "join": {
+        "type": "LEFT",
+        "joinCondition": "o.person_id = i.person_id AND i.hiv_viral_load IS NOT NULL AND DATE(i.test_datetime) > DATE(o.date_enrolled_to_otz)"
+      }
+    }
+  ],
+  "columns": [
+    {
+      "type": "simple_column",
+      "alias": "person_id",
+      "column": "o.person_id"
+    },
+    {
+      "type": "simple_column",
+      "alias": "date_of_birth",
+      "column": "DATE_FORMAT(o.birth_date, '%Y-%m-%d')"
+    },
+    {
+      "type": "derived_column",
+      "alias": "age_at_enrollment",
+      "expressionType": "simple_expression",
+      "expressionOptions": {
+        "expression": "extract(year from (from_days(datediff(o.date_enrolled_to_otz,o.birth_date))))"
+      }
+    },
+    {
+      "type": "simple_column",
+      "alias": "encounter_datetime",
+      "column": "o.encounter_datetime"
+    },
+    {
+      "type": "simple_column",
+      "alias": "date_enrolled_to_otz",
+      "column": "o.date_enrolled_to_otz"
+    },
+    {
+      "type": "simple_column",
+      "alias": "next_encounter_datetime",
+      "column": "o.next_encounter_datetime"
+    },
+    {
+      "type": "simple_column",
+      "alias": "test_datetime",
+      "column": "i.test_datetime"
+    },
+    {
+      "type": "simple_column",
+      "alias": "hiv_viral_load",
+      "column": "i.hiv_viral_load"
+    },
+    {
+      "type": "simple_column",
+      "alias": "location_id",
+      "column": "o.location_id"
+    }
+  ],
+  "filters": {
+    "conditionJoinOperator": "and",
+    "conditions": [
+      {
+        "filterType": "tableColumns",
+        "conditionExpression": "DATE(o.encounter_datetime) <= DATE(?)",
+        "parameterName": "endDate"
+      },
+      {
+        "filterType": "tableColumns",
+        "conditionExpression": "DATE(o.next_encounter_datetime) IS NULL || DATE(o.next_encounter_datetime) > DATE(?)",
+        "parameterName": "endDate"
+      },
+      {
+        "filterType": "tableColumns",
+        "conditionExpression": "DATE(i.test_datetime) <= DATE(?)",
+        "parameterName": "endDate"
+      }
+    ]
+  }
+}

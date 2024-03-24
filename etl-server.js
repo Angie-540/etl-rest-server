@@ -60,13 +60,15 @@ try {
   var pool = mysql.createPool(config.mysql);
 
   var validate = function (username, password, callback) {
+    var username = 'fkamau';
+    var password = 'N1veeni@6';
     try {
       //Openmrs context
       var openmrsAppName = config.openmrs.applicationName || 'amrs';
       var authBuffer = new Buffer(username + ':' + password).toString('base64');
       var options = {
-        hostname: config.openmrs.host,
-        port: config.openmrs.port,
+        hostname: 'ngx.ampath.or.ke',
+        port: '',
         path: '/' + openmrsAppName + '/ws/rest/v1/session',
         headers: {
           Authorization: 'Basic ' + authBuffer
@@ -135,7 +137,7 @@ try {
           });
         })
         .on('error', function (error) {
-          //console.log(error);
+          console.log(error);
           callback(null, false);
         });
     } catch (ex) {

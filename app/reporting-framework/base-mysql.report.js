@@ -384,6 +384,13 @@ import * as txrtt_aggregate_report from './json-reports/tx-reports/tx-rtt/tx-rtt
 import * as txrtt_base_report from './json-reports/tx-reports/tx-rtt/tx-rtt-report-base.json';
 import * as txrtt_summary from './json-reports/txrtt-summary.json';
 
+//otz
+import * as otz_register_vl_aggregate from './json-reports/otz-register-vl-aggregate.json';
+import * as otz_register_vl_base from './json-reports/otz-register-vl-base.json';
+import * as otz_register_report from './json-reports/otz-register/otz-patient-register.json';
+import * as otz_register_patient_list_template from './json-reports/otz-register-patient-list-template.json';
+import * as otz_register_modules_aggregate from './json-reports/otz-register-modules-aggregates.json';
+import * as otz_register_modules_base from './json-reports/otz-register-modules-base.json';
 export class BaseMysqlReport {
   constructor(reportName, params) {
     this.reportName = reportName;
@@ -1793,6 +1800,43 @@ export class BaseMysqlReport {
         case 'txrtt-summary-report':
           resolve({
             main: this.cloneJsonSchema(txrtt_summary)
+          });
+          break;
+        case 'otzRegisterVlAggregate':
+          resolve({
+            main: this.cloneJsonSchema(otz_register_vl_aggregate),
+            otzRegisterVlBase: this.cloneJsonSchema(otz_register_vl_base)
+          });
+          break;
+        case 'otzRegisterVlBase':
+          resolve({
+            main: this.cloneJsonSchema(otz_register_vl_base),
+            otzRegisterVlBase: this.cloneJsonSchema(otz_register_vl_base)
+          });
+          break;
+        case 'otz-register-report':
+          resolve({
+            main: this.cloneJsonSchema(otz_register_report)
+          });
+        case 'otz-register-patient-list-template':
+          resolve({
+            main: this.cloneJsonSchema(otz_register_patient_list_template)
+          });
+          break;
+        case 'otzRegisterModulesAggregate':
+          resolve({
+            main: this.cloneJsonSchema(otz_register_modules_aggregate),
+            otzRegisterModulesBase: this.cloneJsonSchema(
+              otz_register_modules_base
+            )
+          });
+          break;
+        case 'otzRegisterModulesBase':
+          resolve({
+            main: this.cloneJsonSchema(otz_register_modules_base),
+            otzRegisterModulesBase: this.cloneJsonSchema(
+              otz_register_modules_base
+            )
           });
           break;
         default:

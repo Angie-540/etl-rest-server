@@ -1,0 +1,68 @@
+{
+  "name": "otzRegisterModulesAggregate",
+  "version": "1.0",
+  "tag": "",
+  "description": "",
+  "uses": [
+    {
+      "name": "otzRegisterModulesBase",
+      "version": "1.0",
+      "type": "dataset_def"
+    }
+  ],
+  "sources": [
+    {
+      "dataSet": "otzRegisterModulesBase",
+      "alias": "otzmod"
+    }
+  ],
+  "columns": [
+    {
+      "type": "derived_column",
+      "alias": "join_location",
+      "expressionType": "simple_expression",
+      "expressionOptions": {
+        "expression": "1"
+      }
+    },
+
+    {
+      "type": "derived_column",
+      "alias": "total_otz_patients",
+      "expressionType": "simple_expression",
+      "expressionOptions": {
+        "expression": "count(otzmod.person_id)"
+      }
+    },
+    {
+      "type": "simple_column",
+      "alias": "location_id",
+      "column": "otzmod.location_id"
+    }
+  ],
+  "groupBy": {
+    "groupParam": "groupByParam",
+    "columns": ["location_id"],
+    "excludeParam": "excludeParam"
+  },
+  "transFormDirectives": {
+    "joinColumn": "location_id",
+    "joinColumnParam": "joinColumnParam",
+    "skipColumns": ["join_location"],
+    "disaggregationColumns": []
+  },
+  "dynamicJsonQueryGenerationDirectives": {
+    "patientListGenerator": {
+      "useTemplate": "otz-register-patient-list-template",
+      "useTemplateVersion": "1.0",
+      "generatingDirectives": {
+        "joinDirectives": {
+          "joinType": "INNER",
+          "joinCondition": "<<base_column>> = <<template_column>>",
+          "baseColumn": "person_id",
+          "templateColumn": "person_id"
+        }
+      }
+    }
+  }
+}

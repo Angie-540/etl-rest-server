@@ -82,6 +82,7 @@ import { Covid19MonthlyReport } from './service/covid-19/covid-19-monthly-report
 import { MlWeeklyPredictionsService } from './service/ml-weekly-predictions.service';
 import { getPatientPredictedScore } from './service/predictions/ml-prediction-service';
 import { CohortModuleService } from './app/otz/cohort-module.service';
+import { OtzRegisterService } from './app/otz/otz-register.service.js';
 
 module.exports = (function () {
   var routes = [
@@ -6327,6 +6328,50 @@ module.exports = (function () {
               reply(new Boom(500, 'Internal server error.', '', '', error));
             });
         },
+        description: 'Get cohort viral load suppression rate',
+        notes: 'Api endpoint that returns cohort viral load suppression rate',
+        tags: ['api']
+      }
+    },
+    {
+      method: 'GET',
+      path: '/etl/otz-register',
+      config: {
+        auth: 'simple',
+        plugins: {},
+        handler: function (request, reply) {
+          request.query.reportName = 'otz-register-report';
+          preRequest.resolveLocationIdsToLocationUuids(request, function () {
+            let requestParams = Object.assign(
+              {},
+              request.query,
+              request.params
+            );
+
+            let requestCopy = _.cloneDeep(requestParams);
+            let reportParams = etlHelpers.getReportParams(
+              request.query.reportName,
+              ['endDate', 'locationUuids', 'locations'],
+              requestParams
+            );
+            requestCopy.locations = reportParams.requestParams.locations;
+
+            const otzService = new OtzRegisterService(
+              'otz-register-report',
+              requestCopy
+            );
+            otzService
+              .getPatientListReport([])
+              .then((result) => {
+                console.log('result', result);
+                reply(result);
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          });
+        },
+
         description: 'Get cohort viral load suppression rate',
         notes: 'Api endpoint that returns cohort viral load suppression rate',
         tags: ['api']
