@@ -1,0 +1,92 @@
+{
+  "name": "otzRegisterEnrollmentStatusBase",
+  "version": "1.0",
+  "tag": "",
+  "description": "",
+  "uses": [],
+  "sources": [
+    {
+      "table": "etl.flat_otz_summary",
+      "alias": "o"
+    },
+    {
+      "table": "etl.flat_hiv_summary_v15b",
+      "alias": "s",
+      "join": {
+        "type": "LEFT",
+        "joinCondition": "o.person_id = s.person_id"
+      }
+    }
+  ],
+  "columns": [
+    {
+      "type": "simple_column",
+      "alias": "person_id",
+      "column": "o.person_id"
+    },
+    {
+      "type": "simple_column",
+      "alias": "date_enrolled_to_otz",
+      "column": "DATE_FORMAT(o.date_enrolled_to_otz, '%Y-%m-%d')"
+    },
+    {
+      "type": "simple_column",
+      "alias": "latest_vl",
+      "column": "s.vl_1"
+    },
+    {
+      "type": "simple_column",
+      "alias": "latest_vl_date",
+      "column": "DATE_FORMAT(s.vl_1_date, '%Y-%m-%d')"
+    },
+    {
+      "type": "simple_column",
+      "alias": "encounter_datetime",
+      "column": "DATE_FORMAT(s.encounter_datetime, '%Y-%m-%d')"
+    },
+    {
+      "type": "simple_column",
+      "alias": "next_encounter_datetime",
+      "column": "DATE_FORMAT(s.next_encounter_datetime_hiv, '%Y-%m-%d')"
+    },
+    {
+      "type": "derived_column",
+      "alias": "vl_done_within_six_months",
+      "expressionType": "simple_expression",
+      "expressionOptions": {
+        "expression": "case when TIMESTAMPDIFF(MONTH,s.vl_1_date,o.date_enrolled_to_otz) <= 6 then 1 else 0 end"
+      }
+    },
+    {
+      "type": "derived_column",
+      "alias": "current_arv_meds",
+      "expressionType": "simple_expression",
+      "expressionOptions": {
+        "expression": "replace(etl.get_arv_names(s.cur_arv_meds), '##', '+')"
+      }
+    },
+    {
+      "type": "simple_column",
+      "alias": "current_arv_line",
+      "column": "s.cur_arv_line"
+    },
+    {
+      "type": "simple_column",
+      "alias": "arv_start_date",
+      "column": "DATE_FORMAT(s.arv_start_date, '%Y-%m-%d')"
+    }
+  ],
+  "filters": {
+    "conditionJoinOperator": "and",
+    "conditions": [
+      {
+        "filterType": "tableColumns",
+        "conditionExpression": "DATE(s.encounter_datetime) <= DATE(o.date_enrolled_to_otz)"
+      },
+      {
+        "filterType": "tableColumns",
+        "conditionExpression": "(DATE(s.next_encounter_datetime_hiv) IS NULL || DATE(s.next_clinical_datetime_hiv) > DATE(o.date_enrolled_to_otz))"
+      }
+    ]
+  }
+}

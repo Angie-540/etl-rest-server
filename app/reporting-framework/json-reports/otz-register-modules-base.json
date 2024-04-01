@@ -60,6 +60,35 @@
       "type": "simple_column",
       "alias": "otz_treatment_literacy",
       "column": "o.otz_treatment_literacy"
+    },
+    {
+      "type": "derived_column",
+      "alias": "otz_discontinue_reason",
+      "expressionType": "case_statement",
+      "expressionOptions": {
+        "caseOptions": [
+          {
+            "condition": "o.discontinue_otz_reason = 5240",
+            "value": "LOST TO FOLLOWUP"
+          },
+          {
+            "condition": "o.discontinue_otz_reason = 6102",
+            "value": "DISCONTINUE"
+          },
+          {
+            "condition": "o.discontinue_otz_reason  = 1593",
+            "value": "DEAD"
+          },
+          {
+            "condition": "o.discontinue_otz_reason = 1594",
+            "value": "TRANSFERRED OUT"
+          },
+          {
+            "condition": "o.discontinue_otz_reason = 9302",
+            "value": "TRANSITION"
+          }
+        ]
+      }
     }
   ],
   "filters": {

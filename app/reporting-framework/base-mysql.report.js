@@ -391,6 +391,11 @@ import * as otz_register_report from './json-reports/otz-register/otz-patient-re
 import * as otz_register_patient_list_template from './json-reports/otz-register-patient-list-template.json';
 import * as otz_register_modules_aggregate from './json-reports/otz-register-modules-aggregates.json';
 import * as otz_register_modules_base from './json-reports/otz-register-modules-base.json';
+import * as otz_register_enrollment_status_base from './json-reports/otz-register-enrollment-status-base.json';
+import * as otz_register_enrollment_status_aggregate from './json-reports/otz-register-enrollment-status-aggregate.json';
+import * as otz_monthly_register_aggregate from './json-reports/otz-monthly-register-aggregate.json';
+import * as otz_monthly_register_base from './json-reports/otz-monthly-register-base.json';
+
 export class BaseMysqlReport {
   constructor(reportName, params) {
     this.reportName = reportName;
@@ -1802,12 +1807,7 @@ export class BaseMysqlReport {
             main: this.cloneJsonSchema(txrtt_summary)
           });
           break;
-        case 'otzRegisterVlAggregate':
-          resolve({
-            main: this.cloneJsonSchema(otz_register_vl_aggregate),
-            otzRegisterVlBase: this.cloneJsonSchema(otz_register_vl_base)
-          });
-          break;
+
         case 'otzRegisterVlBase':
           resolve({
             main: this.cloneJsonSchema(otz_register_vl_base),
@@ -1818,9 +1818,11 @@ export class BaseMysqlReport {
           resolve({
             main: this.cloneJsonSchema(otz_register_report)
           });
-        case 'otz-register-patient-list-template':
+          break;
+        case 'otzRegisterVlAggregate':
           resolve({
-            main: this.cloneJsonSchema(otz_register_patient_list_template)
+            main: this.cloneJsonSchema(otz_register_vl_aggregate),
+            otzRegisterVlBase: this.cloneJsonSchema(otz_register_vl_base)
           });
           break;
         case 'otzRegisterModulesAggregate':
@@ -1831,11 +1833,49 @@ export class BaseMysqlReport {
             )
           });
           break;
+        case 'otz-register-patient-list-template':
+          resolve({
+            main: this.cloneJsonSchema(otz_register_patient_list_template)
+          });
+          break;
         case 'otzRegisterModulesBase':
           resolve({
             main: this.cloneJsonSchema(otz_register_modules_base),
             otzRegisterModulesBase: this.cloneJsonSchema(
               otz_register_modules_base
+            )
+          });
+          break;
+        case 'otzRegisterEnrollmentStatusAggregate':
+          resolve({
+            main: this.cloneJsonSchema(
+              otz_register_enrollment_status_aggregate
+            ),
+            otzRegisterEnrollmentStatusBase: this.cloneJsonSchema(
+              otz_register_enrollment_status_base
+            )
+          });
+          break;
+        case 'otzRegisterEnrollmentStatusBase':
+          resolve({
+            main: this.cloneJsonSchema(otz_register_enrollment_status_base),
+            otzRegisterEnrollmentStatusBase: this.cloneJsonSchema(
+              otz_register_enrollment_status_base
+            )
+          });
+        case 'otzMonthlyRegisterBase':
+          resolve({
+            main: this.cloneJsonSchema(otz_monthly_register_base),
+            otzMonthlyRegisterBase: this.cloneJsonSchema(
+              otz_monthly_register_base
+            )
+          });
+          break;
+        case 'otzMonthlyRegisterAggregate':
+          resolve({
+            main: this.cloneJsonSchema(otz_monthly_register_aggregate),
+            otzMonthlyRegisterBase: this.cloneJsonSchema(
+              otz_monthly_register_base
             )
           });
           break;

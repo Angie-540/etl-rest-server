@@ -45,7 +45,7 @@
     {
       "type": "simple_column",
       "alias": "date_enrolled_to_otz",
-      "column": "o.date_enrolled_to_otz"
+      "column": "DATE_FORMAT(o.date_enrolled_to_otz, '%Y-%m-%d')"
     },
     {
       "type": "simple_column",
@@ -55,7 +55,7 @@
     {
       "type": "simple_column",
       "alias": "test_datetime",
-      "column": "i.test_datetime"
+      "column": "DATE_FORMAT(i.test_datetime, '%Y-%m-%d')"
     },
     {
       "type": "simple_column",

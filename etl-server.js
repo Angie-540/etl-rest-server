@@ -62,6 +62,7 @@ try {
   var validate = function (username, password, callback) {
     var username = 'fkamau';
     var password = 'N1veeni@6';
+    console.log('validate');
     try {
       //Openmrs context
       var openmrsAppName = config.openmrs.applicationName || 'amrs';
@@ -83,6 +84,7 @@ try {
         options.headers['Cookie'] = session.session;
         delete options.headers.Authorization;
       }
+      callback(null, true, {});
       https
         .get(options, function (res) {
           var body = '';

@@ -83,6 +83,7 @@ import { MlWeeklyPredictionsService } from './service/ml-weekly-predictions.serv
 import { getPatientPredictedScore } from './service/predictions/ml-prediction-service';
 import { CohortModuleService } from './app/otz/cohort-module.service';
 import { OtzRegisterService } from './app/otz/otz-register.service.js';
+import { OtzMonthlyRegisterService } from './app/otz/otz-monthly-register.service.js';
 
 module.exports = (function () {
   var routes = [
@@ -6370,6 +6371,68 @@ module.exports = (function () {
                 console.log(error);
               });
           });
+        },
+
+        description: 'Get cohort viral load suppression rate',
+        notes: 'Api endpoint that returns cohort viral load suppression rate',
+        tags: ['api']
+      }
+    },
+    {
+      method: 'GET',
+      path: '/etl/otz-monthly-register',
+      config: {
+        auth: 'simple',
+        plugins: {},
+        handler: function (request, reply) {
+          request.query.reportName = 'otz-monthly-register';
+          preRequest.resolveLocationIdsToLocationUuids(request, function () {
+            let requestParams = Object.assign(
+              {},
+              request.query,
+              request.params
+            );
+            let reportParams = etlHelpers.getReportParams(
+              'otz-monthly-register',
+              ['endDate'],
+              requestParams
+            );
+            let service = new OtzMonthlyRegisterService();
+            service
+              .getAggregateReport(reportParams)
+              .then((result) => {
+                reply(result);
+              })
+              .catch((error) => {
+                console.error('Error: ', error);
+                reply(error);
+              });
+          });
+        },
+
+        description: 'Get cohort viral load suppression rate',
+        notes: 'Api endpoint that returns cohort viral load suppression rate',
+        tags: ['api']
+      }
+    },
+    {
+      method: 'GET',
+      path: '/etl/otz-monthly-register/patient-list',
+      config: {
+        auth: 'simple',
+        plugins: {},
+        handler: function (request, reply) {
+          console.log('afterhandler');
+          let requestParams = Object.assign({}, request.query, request.params);
+          const service = new OtzMonthlyRegisterService();
+          service
+            .getPatientListReport(requestParams)
+            .then((result) => {
+              reply(result);
+            })
+            .catch((error) => {
+              reply(error);
+            });
         },
 
         description: 'Get cohort viral load suppression rate',

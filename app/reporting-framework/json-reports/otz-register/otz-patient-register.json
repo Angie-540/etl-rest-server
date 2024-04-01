@@ -1,3 +1,7 @@
 {
-  "reports": ["otzRegisterVlAggregate", "otzRegisterModulesAggregate"]
+  "reports": [
+    "otzRegisterVlAggregate",
+    "otzRegisterModulesAggregate",
+    "otzRegisterEnrollmentStatusAggregate"
+  ]
 }

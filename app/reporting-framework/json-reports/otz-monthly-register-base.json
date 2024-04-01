@@ -1,0 +1,147 @@
+{
+  "name": "otzMonthlyRegisterBase",
+  "version": "1.0",
+  "tag": "",
+  "description": "",
+  "uses": [],
+  "sources": [
+    {
+      "table": "etl.otz_monthly_register_dataset",
+      "alias": "m"
+    }
+  ],
+  "columns": [
+    {
+      "type": "simple_column",
+      "alias": "person_id",
+      "column": "m.person_id"
+    },
+    {
+      "type": "simple_column",
+      "alias": "location_id",
+      "column": "m.location_id"
+    },
+    {
+      "type": "simple_column",
+      "alias": "endDate",
+      "column": "DATE_FORMAT(m.endDate,'%Y-%m')"
+    },
+    {
+      "type": "simple_column",
+      "alias": "birth_date",
+      "column": "DATE_FORMAT(m.birthdate,'%Y-%m-%d')"
+    },
+    {
+      "type": "derived_column",
+      "alias": "age_at_enrollment",
+      "expressionType": "simple_expression",
+      "expressionOptions": {
+        "expression": "extract(year from (from_days(datediff(m.date_enrolled_to_otz,m.birthdate))))"
+      }
+    },
+    {
+      "type": "simple_column",
+      "alias": "original_art_regimen",
+      "column": "m.original_art_regimen"
+    },
+    {
+      "type": "simple_column",
+      "alias": "art_start_date",
+      "column": "DATE_FORMAT(m.original_art_start_date,'%Y-%m-%d')"
+    },
+    {
+      "type": "simple_column",
+      "alias": "vl_result_at_otz_enrollment",
+      "column": "m.vl_result_at_otz_enrollment"
+    },
+    {
+      "type": "simple_column",
+      "alias": "vl_result_date_at_otz_enrollment",
+      "column": "DATE_FORMAT(m.vl_result_date_at_otz_enrollment,'%Y-%m-%d')"
+    },
+    {
+      "type": "simple_column",
+      "alias": "art_regimen_at_otz_enrollment",
+      "column": "m.art_regimen_at_otz_enrollment"
+    },
+    {
+      "type": "simple_column",
+      "alias": "art_regimen_start_date_at_otz_enrollment",
+      "column": "DATE_FORMAT(m.art_regimen_start_date_at_otz_enrollment,'%Y-%m-%d')"
+    },
+    {
+      "type": "simple_column",
+      "alias": "art_regimen_line_at_otz_enrollment",
+      "column": "art_regimen_line_at_otz_enrollment"
+    },
+    {
+      "type": "simple_column",
+      "alias": "otz_orientation",
+      "column": "m.otz_orientation"
+    },
+    {
+      "type": "simple_column",
+      "alias": "otz_treatment_literacy",
+      "column": "m.otz_treatment_literacy"
+    },
+    {
+      "type": "simple_column",
+      "alias": "otz_participation",
+      "column": "m.otz_participation"
+    },
+    {
+      "type": "simple_column",
+      "alias": "otz_peer_mentorship",
+      "column": "m.otz_peer_mentorship"
+    },
+    {
+      "type": "simple_column",
+      "alias": "otz_leadership",
+      "column": "m.otz_leadership"
+    },
+    {
+      "type": "simple_column",
+      "alias": "otz_future_decison_making",
+      "column": "m.otz_future_decison_making"
+    },
+    {
+      "type": "simple_column",
+      "alias": "otz_transition_adult_care",
+      "column": "m.otz_transition_adult_care"
+    },
+    {
+      "type": "simple_column",
+      "alias": "discontinue_otz_reason",
+      "column": "m.discontinue_otz_reason"
+    },
+    {
+      "type": "simple_column",
+      "alias": "discontinue_otz_date",
+      "column": "DATE_FORMAT(m.discontinue_otz_date,'%Y-%m-%d')"
+    },
+    {
+      "type": "simple_column",
+      "alias": "date_enrolled_to_otz",
+      "column": "DATE_FORMAT(m.date_enrolled_to_otz,'%Y-%m-%d')"
+    },
+    {
+      "type": "simple_column",
+      "alias": "vl_result_post_otz_enrollment",
+      "column": "m.vl_result_post_otz_enrollment"
+    }
+  ],
+  "filters": {
+    "conditionJoinOperator": "and",
+    "conditions": [
+      {
+        "filterType": "tableColumns",
+        "conditionExpression": "m.endDate = ?",
+        "parameterName": "endMonth"
+      }
+    ]
+  },
+  "groupBy": {
+    "groupParam": "groupByParam",
+    "columns": ["person_id"]
+  }
+}

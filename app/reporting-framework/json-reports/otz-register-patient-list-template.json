@@ -44,6 +44,27 @@
     },
     {
       "type": "derived_column",
+      "alias": "firstname_middlename",
+      "expressionType": "simple_expression",
+      "expressionOptions": {
+        "expression": " CONCAT(COALESCE(person_name.given_name, ''), ' ', COALESCE(person_name.middle_name, ''))"
+      }
+    },
+    {
+      "type": "derived_column",
+      "alias": "last_name",
+      "expressionType": "simple_expression",
+      "expressionOptions": {
+        "expression": " person_name.family_name"
+      }
+    },
+    {
+      "type": "simple_column",
+      "alias": "gender",
+      "column": "t1.gender"
+    },
+    {
+      "type": "derived_column",
       "alias": "identifiers",
       "expressionType": "simple_expression",
       "expressionOptions": {
