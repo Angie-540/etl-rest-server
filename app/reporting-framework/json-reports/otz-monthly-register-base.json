@@ -111,11 +111,6 @@
     },
     {
       "type": "simple_column",
-      "alias": "discontinue_otz_reason",
-      "column": "m.discontinue_otz_reason"
-    },
-    {
-      "type": "simple_column",
       "alias": "discontinue_otz_date",
       "column": "DATE_FORMAT(m.discontinue_otz_date,'%Y-%m-%d')"
     },
@@ -128,6 +123,46 @@
       "type": "simple_column",
       "alias": "vl_result_post_otz_enrollment",
       "column": "m.vl_result_post_otz_enrollment"
+    },
+    {
+      "type": "simple_column",
+      "alias": "first_regimen_switch",
+      "column": "m.first_regimen_switch"
+    },
+    {
+      "type": "simple_column",
+      "alias": "first_regimen_switch_date",
+      "column": "DATE_FORMAT(m.first_regimen_switch_date,'%Y-%m-%d')"
+    },
+    {
+      "type": "simple_column",
+      "alias": "second_regimen_switch",
+      "column": "m.second_regimen_switch"
+    },
+    {
+      "type": "simple_column",
+      "alias": "second_regimen_switch_date",
+      "column": "DATE_FORMAT(m.second_regimen_switch_date,'%Y-%m-%d')"
+    },
+    {
+      "type": "simple_column",
+      "alias": "third_regimen_switch",
+      "column": "m.third_regimen_switch"
+    },
+    {
+      "type": "simple_column",
+      "alias": "third_regimen_switch_date",
+      "column": "DATE_FORMAT(m.third_regimen_switch_date,'%Y-%m-%d')"
+    },
+    {
+      "type": "simple_column",
+      "alias": "fourth_regimen_switch",
+      "column": "m.fourth_regimen_switch"
+    },
+    {
+      "type": "simple_column",
+      "alias": "fourth_regimen_switch_date",
+      "column": "DATE_FORMAT(m.fourth_regimen_switch_date,'%Y-%m-%d')"
     }
   ],
   "filters": {
