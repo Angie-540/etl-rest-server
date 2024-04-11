@@ -24,7 +24,7 @@
     {
       "type": "simple_column",
       "alias": "endDate",
-      "column": "DATE_FORMAT(m.endDate,'%Y-%m')"
+      "column": "DATE_FORMAT(m.endDate,'%Y-%m-%d')"
     },
     {
       "type": "simple_column",
@@ -163,6 +163,11 @@
       "type": "simple_column",
       "alias": "fourth_regimen_switch_date",
       "column": "DATE_FORMAT(m.fourth_regimen_switch_date,'%Y-%m-%d')"
+    },
+    {
+      "type": "simple_column",
+      "alias": "clinical_remarks",
+      "column": "m.clinical_remarks"
     }
   ],
   "filters": {

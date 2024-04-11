@@ -6373,8 +6373,8 @@ module.exports = (function () {
           });
         },
 
-        description: 'Get cohort viral load suppression rate',
-        notes: 'Api endpoint that returns cohort viral load suppression rate',
+        description: 'Get cohort otz register data',
+        notes: 'Api endpoint that returns otz register data',
         tags: ['api']
       }
     },
@@ -6410,8 +6410,8 @@ module.exports = (function () {
           });
         },
 
-        description: 'Get cohort viral load suppression rate',
-        notes: 'Api endpoint that returns cohort viral load suppression rate',
+        description: 'Get otz register aggregate data',
+        notes: 'Api endpoint that returns otz register aggregate data',
         tags: ['api']
       }
     },
@@ -6429,14 +6429,15 @@ module.exports = (function () {
             .getPatientListReport(requestParams)
             .then((result) => {
               reply(result);
+              console.log('otz-monthly-register/patient-list', result);
             })
             .catch((error) => {
               reply(error);
             });
         },
 
-        description: 'Get cohort viral load suppression rate',
-        notes: 'Api endpoint that returns cohort viral load suppression rate',
+        description: 'Get otz monthly summary',
+        notes: 'Api endpoint that returns otz monthly summary',
         tags: ['api']
       }
     }
